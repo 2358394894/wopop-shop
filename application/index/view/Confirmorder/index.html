@@ -1,0 +1,89 @@
+{extend name="layout/base"}
+
+{block name="content"}
+<!--右侧内容样式-->
+<div class="conter_que">
+	<style type="text/css">
+		.con{border: 1px solid red !important;}
+	</style>
+	<div class="shou">
+		<h2>请选择收货信息(必选)</h2>
+		{volist name="addressList" id="vo"}
+		<div class="left choose_add">
+			<h3 class="c_name">{$vo.dname}</h3>
+			<p class="c_phone">{$vo.dphone}</p>
+			<p class="c_address">{$vo.daddress}</p>
+			<p class="c_zipcode">{$vo.zipcode}</p>
+			<span><a href="#">修改</a></span>
+		</div>
+		{/volist}
+	</div>
+	<div class="fu"><h2>付款方式</h2><p>在线支付 （支持支付宝、微信、网银、快捷支付等</p></div>
+
+	<form id="tab" action="/confirmorder" method="post" enctype="multipart/form-data">
+		<!-- 添加表单隐藏控件，用于修改表单提交方式 -->
+		<input type="hidden" name="_method" value="PUT">
+		<div class="song">
+			<h2>送货清单</h2>
+			<div class="biao">
+				{volist name="productList" id="vo"}
+				<img src="{$vo.ppic}" width="25" height="25"/>
+				<span><a href="#">{$vo.pname}</a></span>
+				<span>￥ {$vo.pprice}</span>
+				<span>x {$pnum}</span>
+				<!-- 创建表单隐藏控件，保存商品id、购买数量、商品单价 -->
+				<input type="text" name="pid" value="{$vo.pid}" hidden>
+				<input type="text" name="pnum" value="{$pnum}" hidden>
+				<input type="text" name="pprice" value="{$vo.pprice}" hidden>
+				{/volist}
+			</div>
+		</div>
+		<div class="ti">
+			<div class="left">
+				<p>配送至 : <span class="editdz">请选择收货信息</span></p>
+				<p>收货人 : <span class="editxm" id="xm"></span>&emsp;&emsp;&emsp;&ensp;手机号 : <span class="editphone"></span></p>
+				<p>邮&emsp;编 : <span class="editzc"></span></p>
+				<!-- 创建表单隐藏控件，保存用户选择的收货信息(地址、姓名、手机号、邮编) -->
+				<input type="text" class="editdz" name="address" value="" hidden>
+				<input type="text" class="editxm" name="uname" value="" hidden>
+				<input type="text" class="editphone" name="uphone" value="" hidden>
+				<input type="text" class="editzc" name="zipcode" value="" hidden>
+			</div>
+			<div class="right">
+				{volist name="productList" id="vo"}
+				<span>应付总额:</span><span><p class="zj">￥{$vo.pprice*$pnum}</p></span>
+				{/volist}
+				<input type="button" id="sub" value="" style="background-image: url('/static/index/images/add_comment.png');width: 156px;height: 52px;border: 0px;">
+			</div>
+		</div>
+	</form>
+
+</div>
+
+<script type="text/javascript">
+	$(function () {
+		// 收货信息选择并绑定
+		$('body').on('click', '.choose_add', function() {
+			$(this).addClass('con').siblings().removeClass('con');
+			var address = $(this).children('.c_address').text();
+			var uname = $(this).children('.c_name').text();
+			var uphone = $(this).children('.c_phone').text();
+			var zipcode = $(this).children('.c_zipcode').text();
+			// 把数据传递到对应位置与表单隐藏控件
+			$('.editdz').text(address).val(address);
+			$('.editxm').text(uname).val(uname);
+			$('.editphone').text(uphone).val(uphone);
+			$('.editzc').text(zipcode).val(zipcode);
+		});
+		// 验证收货信息是否存在(判断是否提交数据)
+		$('#sub').click(function() {
+			if($('#xm').text() == ''){
+				alert("请选择您的收货信息！");
+				return;
+			} else{
+				$('#tab').submit();
+			}
+		});
+	})
+</script>
+{/block}

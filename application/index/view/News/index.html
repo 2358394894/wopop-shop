@@ -1,0 +1,42 @@
+{extend name="layout/base"}
+
+{block name="content"}
+<!--店铺公告样式-->
+<div class="Inside_pages clearfix">
+  <div class="left_style">
+    <!--列表-->
+    <div class="menu_style">
+      <ul class="menu_list">
+        <li class="on"><em></em><a href="{:url('index/News/index')}">店铺专区</a></li>
+        <li><em></em><a href="{:url('index/Products/index')}" target="_blank">商品专区</a></li>
+        <li><em></em><a href="{:url('index/User/index')}">个人中心</a></li>
+        <li><em></em><a href="#">订单专区</a></li>
+        <li><em></em><a href="#">发货管理</a></li>
+        <li><em></em><a href="#">收款账户</a></li>
+      </ul>
+    </div>
+  </div>
+  <!--右侧内容样式-->
+  <div class="right_style">
+    <!--内容详细-->
+    <div class="title_style"><em></em>店铺公告</div>
+    <div class="content_style">
+      <div class="Bulletin_style">
+        <div class="Bulletin_operating"><a href="#" class="add_Bulletin">头条专栏</a><a href="{:url('index/Index/index')}" class="return_shops">返回主页</a></div>
+        <div class="Bulletin_list">
+          <ul class="list">
+            {volist name="news" id="vo"}
+            <li class="Bulletin_content">
+              <p class="Bulletin_time">更新于{$vo.ndate}</p>
+              <p style="font-weight: bold;">{$vo.ntitle}<span style="float: right; font-weight: normal;">作者：{$vo.author}</span></p>
+              <p>{$vo.ncontent}</p>
+              <p class="Bulletin_btn"><a href="#" class="Modify_cz">评论</a><a href="#" class="Delete_z">查看详情</a></p>
+            </li>
+            {/volist}
+          </ul>
+        </div>
+      </div>    
+    </div>
+  </div>
+</div>
+{/block}

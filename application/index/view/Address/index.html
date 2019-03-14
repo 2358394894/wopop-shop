@@ -1,0 +1,65 @@
+{extend name="layout/base"}
+
+{block name="content"}
+<!-- 用户中心css -->
+<link href="/static/index/css/user_style.css" rel="stylesheet" type="text/css" />
+
+<!--用户中心样式-->
+<div class="user_style clearfix">
+<div class="user_center clearfix">
+
+<!-- 左侧用户信息 -->
+<!-- 使用包含文件继承公共代码 -->
+{include file="layout/ubase" /}<!-- End-左侧用户信息 -->
+
+<!--右侧样式属性-->
+<div class="right_style">
+    <!--地址管理-->
+    <div class="user_address_style">
+        <div class="title_style"><em></em>地址管理</div> 
+        <div class="add_address">
+            <span class="name">添加送货地址</span>
+            <form id="tab" action="{:url('index/Address/insert')}" method="post" enctype="multipart/form-data">
+                <table cellpadding="0" cellspacing="0" width="100%">
+                    <tr><td class="label_name">收&nbsp;货&nbsp;&nbsp;人：</td><td><input name="dname" type="text"  class="add_text" style=" width:100px"/><i>*</i></td></tr>
+                    <tr><td class="label_name">详细地址：</td><td><textarea name="daddress" cols="" rows="" style=" width:500px; height:100px; margin:5px 0px"></textarea><i>*</i></td></tr>
+                    <tr><td class="label_name">邮&emsp;&ensp;&nbsp;编：</td><td><input name="zipcode" type="text" class="add_text" style=" width:100px"/><i>*</i></td></tr>
+                    <tr><td class="label_name">手&emsp;&ensp;&nbsp;机：</td><td><input name="dphone" type="text" class="add_text" style=" width:200px"/>&ensp;(选填)</td></tr>
+                    <tr class="moren_dz" style="color: #999"><td class="label_name"></td><td><label><input name="" type="checkbox" value="" />设置为默认地址</label></td></tr>
+                    <tr><td colspan="2" class="center"><input type="submit" value="保存"  class="add_dzbtn"/><input type="reset" value="清空" onclick="res()" class="reset_btn"/></td></tr>
+                    <script type="text/javascript">
+                        function res() {
+                            document.getElementById('tab').reset();
+                        }
+                    </script>
+                </table>
+            </form>
+        </div>
+        <!--用户地址-->
+        <div class="address_content">
+            <div class="address_prompt">以添加了5条地址，最多保存添加15条地址</div>
+            <table cellpadding="0" cellspacing="0" class="user_address" width="100%">
+                <thead>
+                    <tr class="label"><td width="80px;">收货人</td><td width="400px;">详细地址</td><td width="80px;">邮编</td><td width="120px;">电话手机</td><td width="180px;">发票抬头</td><td width="80px;">操作</td></tr>
+                </thead>
+                {volist name="arList" id="vo"}
+                <tbody>
+                    <tr><td>{$vo.dname}</td><td>{$vo.daddress}</td><td>{$vo.zipcode}</td><td>{$vo.dphone}</td><td>个人</td><td><a href="#">修改</a> | <a href="{:url('index/Address/delete', ['id' => $vo['did']])}">删除</a></td></tr>
+                </tbody>
+                {/volist}
+            </table>
+        </div>
+    </div>
+</div>
+
+</div>
+</div>
+<script>
+    $(document).ready(function(){
+        $('.moren_dz input').iCheck({
+            checkboxClass: 'icheckbox_flat-green',
+            radioClass: 'iradio_flat-green'
+        });
+    });
+</script>
+{/block}

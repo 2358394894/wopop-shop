@@ -1,0 +1,67 @@
+{extend name="layout/base"}
+
+{block name="right-content"}
+<div class="header"><h1 class="page-title">添加 管理员信息</h1></div>
+
+<ul class="breadcrumb">
+    <li><a href="index.html">主页</a> <span class="divider">/</span></li>
+    <li><a href="users.html">管理员列表</a> <span class="divider">/</span></li>
+    <li class="active">添加管理员信息</li>
+</ul>
+
+<div class="container-fluid">
+    <div class="row-fluid">
+        <!-- 按钮 -->    
+        <div class="btn-toolbar">
+            <button class="btn btn-primary" onclick="sub()"><i class="icon-save"></i> 保存</button>
+            <!-- 给保存按钮绑定表单提交事件 -->
+            <script type="text/javascript">
+                function sub(){
+                	document.getElementById('tab').submit();
+                }
+            </script>
+            <button class="btn btn-danger" onclick="res()"><i class="icon-undo"></i> 重置</button>
+            <!-- 给重置按钮绑定表单清空事件 -->
+            <script type="text/javascript">
+                function res() {
+                    document.getElementById('tab').reset();
+                }
+            </script>
+            <div class="btn-group"></div>
+        </div>
+        <!-- 表单 -->
+        <div class="well">
+            <ul class="nav nav-tabs">
+              <li class="active"><a href="#home" data-toggle="tab">管理员信息</a></li>
+            </ul>
+            <div id="myTabContent" class="tab-content">
+                <div class="tab-pane active in" id="home">
+                <form id="tab" action="/admin/admins" method="post">
+					<!-- 添加表单隐藏控件，用于修改表单提交方式 -->
+                	<input type="hidden" name="_method" value="PUT">
+
+                    <label>用户名</label>
+                    <input type="text" name="aname" required="required" class="input-xlarge"><label>密码</label>
+                    <input type="password" name="apwd" required="required" class="input-xlarge"><label>确认密码</label>
+                    <input type="password" name="pwd_r" required="required" class="input-xlarge">
+                    <label>权限等级</label>
+                    <div class="input-prepend">
+                        <label class="radio inline">
+                            <input type="radio" name="alevel" value="1" checked>高级管理员</label>
+                        <label class="radio inline">
+                            <input type="radio" name="alevel" value="2">初级管理员</label>
+                    </div>
+                </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- 尾部 -->
+        <footer>
+            <hr>                        
+            <p class="pull-right">Copyright statement<a href="#" title="wopop" target="_blank">&ensp;wopop</a></p>
+            <p>&copy; wopop <a href="#" target="_blank">Create</a></p>
+        </footer>
+    </div>
+</div>
+{/block}

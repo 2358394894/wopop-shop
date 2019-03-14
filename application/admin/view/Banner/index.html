@@ -1,0 +1,98 @@
+{extend name="layout/base"}
+
+{block name="right-content"}
+<div class="header"><h1 class="page-title">广告图列表</h1></div>
+
+<ul class="breadcrumb">
+    <li><a href="index.html">主页</a> <span class="divider">/</span></li>
+    <li class="active">广告图列表</li>
+</ul>
+
+<div class="container-fluid">
+    <div class="row-fluid">
+        <!-- 按钮 -->
+        <div class="btn-toolbar">
+            <!-- 绑定页面跳转事件 -->
+            <button class="btn btn-primary" onclick="jump()"><i class="icon-plus"></i> 添加广告图</button>
+            <button class="btn">Import</button>
+            <button class="btn">Export</button>
+            <div class="btn-group"></div>
+        </div>
+        <!-- 列表 -->
+        <div class="well">
+            <table class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>广告图ID</th>
+                        <th>缩略图</th>
+                        <th>页面跳转地址</th>
+                        <th>图片排序</th>
+                        <th style="width: 26px;"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {volist name="res" id="vo"}
+                    <tr>
+                        <td>{$vo['bid']}</td>
+                        <td><img src="{$vo['bpic']}" alt=""></td>
+                        <td>{$vo['burl']}</td>
+                        <td>{$vo['border']}</td>
+                        <td>
+                        <a href="{:url('admin/Banner/view',['type'=>'edit','id' => $vo['bid']])}"><i class="icon-pencil" title="编辑"></i></a>
+                        <a href="#myModal" data-toggle="modal"><i class="icon-remove" title="删除"></i></a>
+                        </td>
+                    </tr>
+                    <script type="text/javascript">
+                        // 删除商品，del()方法写在volist标签内，避免表记录为空时，变量vo不存在
+                        function del() {
+                            window.location.href='{:url('admin/Banner/delete', ['id' => $vo['bid']])}';
+                        }
+                    </script>
+                    {/volist}
+                </tbody>
+            </table>
+        </div>
+        <!-- 翻页按钮 -->
+        <div class="pagination">
+            <ul>
+                <li class="disabled"><a href="#">首页</a></li>
+                <li class="disabled"><a href="#">&laquo;</a></li>
+                <li class="active"><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">&raquo;</a></li>
+                <li><a href="#">尾页</a></li>
+            </ul>
+        </div>
+        <!-- 删除确认框 -->
+        <div class="modal small hide fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 id="myModalLabel">删除确认</h3>
+            </div>
+            <div class="modal-body">
+                <p class="error-text"><i class="icon-warning-sign modal-icon"></i>你确定你要删除该广告图吗?</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn" data-dismiss="modal" aria-hidden="true">取消</button>
+                <button onclick="del()" class="btn btn-danger" data-dismiss="modal">删除</button>
+            </div>
+        </div>
+        <!-- 尾部 -->
+        <footer>
+            <hr>                        
+            <p class="pull-right">Copyright statement<a href="#" title="wopop" target="_blank">&ensp;wopop</a></p>
+            <p>&copy; wopop <a href="#" target="_blank">Create</a></p>
+        </footer>
+    </div>
+</div>
+
+<!-- 商品列表页添加与删除事件跳转方法 -->
+<script type="text/javascript">
+    // 添加商品
+    function jump(){
+        window.location.href='{:url('admin/Banner/view',['type'=>'insert'])}';
+    }
+</script>
+{/block}

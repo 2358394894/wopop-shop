@@ -1,0 +1,58 @@
+{extend name="layout/base"}
+
+{block name="content"}
+<!-- 用户中心css -->
+<link href="/static/index/css/user_style.css" rel="stylesheet" type="text/css" />
+
+
+<!--用户信息中心样式-->
+<div class="user_style clearfix">
+    <div class="user_center clearfix">
+        
+        <!-- 左侧用户信息 -->
+        <!-- 使用包含文件继承公共代码 -->
+        {include file="layout/ubase" /}<!-- End-左侧用户信息 -->
+
+        <!--右侧样式-->
+        <div class="right_style">
+            <!--消费记录样式-->
+            <div class="user_address_style">
+                <div class="title_style"><em></em>用户信息</div> 
+                <!--用户信息样式-->
+                <!--个人信息-->
+                <div class="Personal_info" id="Personal">
+                    <form id="tab" action="{:url('index/Userinfo/update')}" method="post" enctype="multipart/form-data">
+                    {volist name="userdata" id="vo"}
+                    <ul class="xinxi">
+                        <!-- 创建隐藏表单控件，保存用户ID值 -->
+                        <input type="hidden" name="uid" value="{$vo.uid}">
+
+                        <li><label>用户名：</label><span><input name="uname" type="text" value="{$vo.uname}"  class="text"  disabled="disabled"/></span></li>
+                        <li><label>电子邮箱：</label><span><input name="uemail" type="text" value="{$vo.uemail}"  class="text"  disabled="disabled"/></span></li>
+                        <li><label>用户QQ：</label><span><input name="uqq" type="text" value="{$vo.uqq}" class="text qq"  disabled="disabled"/></span></li>
+                        <script type="text/javascript">
+                                // 验证qq的值是否为0
+                                var zhi = $('.qq').val();
+                                if (zhi == 0) {$('.qq').val('');} else {$('.qq').val();}
+                        </script>
+                        <li><label>联系方式：</label><span><input name="uphone" type="text" value="{$vo.uphone}"  class="text"  disabled="disabled"/></span></li>
+
+                        <div class="bottom"><input type="button" value="修改信息" class="modify edit"/><input type="submit" value="确认修改"  class="confirm" style="display: none;" /></div>
+                    </ul>
+                    {/volist}
+                        <script type="text/javascript">
+                            $('.edit').click(function() { $(this).hide().next().show(); });
+                        </script>
+                        </form>
+                        <!-- 上传头像 -->
+                        <ul class="Head_portrait">
+                            <li class="User_avatar"><img src="/static/index/images/people.png" /></li>
+                            <li><input type="submit" value="上传头像"  class="submit"/></li>
+                        </ul>
+                    </div>    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{/block}

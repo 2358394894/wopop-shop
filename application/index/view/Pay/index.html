@@ -1,0 +1,26 @@
+{extend name="layout/base"}
+
+{block name="content"}
+<div class="conter_fu">
+	{volist name='oitems' id='vo'}
+	<div class="bian">
+		<h2>请您及时付款，我们将为您闪电送达！</h2>
+		<p class="qin">请您在24小时内付款，逾期或订单内商品库存无法满足订单时订单将被取消！</p>
+		<p><span>订单编号：</span><span>{$vo.oid}</span></p>
+		<p><span>订单金额：</span><span class="jin">￥{$vo.ototal}</span></p>
+	</div>
+	{/volist}
+	<div class="fu">
+		<span><h2>请选择支付方式：</h2></span>
+		<div class="left">
+			<label for="fu"><input type="radio" name="sex" id="zhifubao" />支付宝</label>
+			<label for="fu"><input type="radio" name="sex" id="weixin" />微信</label>
+		</div>
+		<div class="right">
+			<span><a href="#">立即支付</a></span>
+			<a href="#">暂不支付</a>
+			<a href="#">取消支付</a>
+		</div>
+	</div>
+</div>
+{/block}

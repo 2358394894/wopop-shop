@@ -1,0 +1,92 @@
+{extend name="layout/base"}
+
+{block name="right-content"}
+<div class="header"><h1 class="page-title">用户列表</h1></div>
+
+<ul class="breadcrumb">
+    <li><a href="index.html">主页</a> <span class="divider">/</span></li>
+    <li class="active">用户列表</li>
+</ul>
+
+<div class="container-fluid">
+    <div class="row-fluid">
+        <!-- 按钮 -->
+        <div class="btn-toolbar">
+            <!-- 绑定页面跳转事件 -->
+            <button class="btn btn-primary" onclick="jump()"><i class="icon-plus"></i> 添加用户</button>
+            <button class="btn">Import</button>
+            <button class="btn">Export</button>
+            <div class="btn-group"></div>
+        </div>
+        <!-- 列表 -->
+        <div class="well">
+            <table class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>用户ID</th>
+                        <th>用户名</th>
+                        <th>手机号</th>
+                        <th>邮箱</th>
+                        <th>注册日期</th>
+                        <th style="width: 26px;"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {volist name="res" id="vo"}
+                    <tr>
+                        <td>{$vo['uid']}</td>
+                        <td>{$vo['uname']}</td>
+                        <td>{$vo['uphone']}</td>
+                        <td>{$vo['uemail']}</td>
+                        <td>{$vo['udate']}</td>
+                        <td>
+                        <a href="user.html"><i class="icon-pencil"></i></a>
+                        <a href="#myModal" role="button" data-toggle="modal"><i class="icon-remove"></i></a>
+                        </td>
+                    </tr>
+                    {/volist}
+                </tbody>
+            </table>
+        </div>
+        <!-- 翻页按钮 -->
+        <div class="pagination">
+            <ul>
+                <li class="disabled"><a href="#">首页</a></li>
+                <li class="disabled"><a href="#">&laquo;</a></li>
+                <li class="active"><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">&raquo;</a></li>
+                <li><a href="#">尾页</a></li>
+            </ul>
+        </div>
+        <!-- 删除确认框 -->
+        <div class="modal small hide fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 id="myModalLabel">删除确认</h3>
+            </div>
+            <div class="modal-body">
+                <p class="error-text"><i class="icon-warning-sign modal-icon"></i>你确定你要删除用户吗?</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn" data-dismiss="modal" aria-hidden="true">取消</button>
+                <button class="btn btn-danger" data-dismiss="modal">删除</button>
+            </div>
+        </div>
+        <!-- 尾部 -->
+        <footer>
+            <hr>                        
+            <p class="pull-right">Copyright statement<a href="#" title="wopop" target="_blank">&ensp;wopop</a></p>
+            <p>&copy; wopop <a href="#" target="_blank">Create</a></p>
+        </footer>
+    </div>
+</div>
+<!-- 添加用户页面跳转事件 -->
+<script type="text/javascript">
+    function jump(){
+        window.location.href='user.html';
+    }
+</script>
+{/block}

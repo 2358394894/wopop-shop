@@ -1,0 +1,155 @@
+{extend name="layout/base"}
+
+{block name="content"}
+<!-- 用户中心css -->
+<link href="/static/index/css/user_style.css" rel="stylesheet" type="text/css" />
+
+
+<!--用户中心样式-->
+<div class="user_style clearfix">
+  <div class="user_center clearfix">
+
+    <!-- 左侧用户信息 -->
+    <!-- 使用包含文件继承公共代码 -->
+    {include file="layout/ubase" /}<!-- End-左侧用户信息 -->
+
+    <!--右侧样式-->
+    <div class="right_style">
+
+      <!-- 公告与用户信息 -->
+      <div class="info_content">
+        <div class="Notice"><span>系统最新公告:</span>为了更好地服务于【每日鲜】的会员朋友及读者 发表意见。</div>
+        <div class="user_info">
+          <ul class="">
+           <li class="Balance"><a href="#"><img src="/static/index/images/user_img_05.png" /><h4>余额：￥54.00</h4></a></li>
+           <li class="Order_form"><a href="#"><img src="/static/index/images/user_img_04.png" /><h4>订单：(5)</h4></a></li>
+           <li class="grade"><a href="#"><img src="/static/index/images/user_img_08.png" /><h4>3</h4></a></li>
+           <li class="Favorable"><a href="#"><img src="/static/index/images/user_img_07.png" /><h4>钻石会员</h4></a></li>
+           <li class="integral"><a href="#"><img src="/static/index/images/user_img_06.png" /><h4>234分</h4></a></li>
+         </ul>
+       </div>
+      </div><!-- End-公告与用户信息 -->
+
+      <!--样式-->
+      <div class="user_info_p_s  clearfix">
+
+        <!--订单记录-->
+        <div class="left_user_cont">
+          <div class="us_Orders left clearfix">
+            <div class="Orders_name">
+              <div class="title_name"><div class="Records">购买记录</div><div class="right select">只记录你最近30天的购买记录</div></div>
+            </div>
+            <table>
+              <thead>
+                <tr>
+                  <th>产品名称</th><th>单价</th><th>数量</th><th>状态</th><th>操作</th>
+                </tr>
+              </thead>
+              <tbody>
+                {volist name='oitemsList' id='vo' key='k'}
+                <!-- 这样就设置了只循环3条数据，offset的意思是从第几条记录开始，length是循环多少次的意思 -->
+                <tr>
+                  <td class="img_link">
+                    <a href="#" class="img"><img src="{$opic[$vo.opid]}" width="80" height="80"></a>
+                    <a href="#" class="title" style="width: 200px;">{$opname[$vo.opid]}</a>
+                  </td>
+                  <td>{$vo['opprice']}</td>
+                  <td>{$vo['onum']}</td>
+                  <td>
+                    {switch name="$ostate[$vo.oid]" }
+                      {case value="1 2"}<p style="color: red;">交易中</p>{/case}
+                      {case value="3"}<p style="color: #999999;">交易完毕</p>{/case}
+                      {default /}未定义
+                    {/switch}
+                  </td>
+                  <td><a href="#" class="View">查看</a></td>
+                </tr>
+                {/volist}
+              </tbody>
+            </table>
+            <!-- 记录数放在循环外获取 -->
+            <div class="us_jls">共&ensp;{$k}&ensp;条记录</div>
+          </div>
+        </div>
+<!--右侧记录样式-->
+<div class="right_user_recording">
+  <div class="us_Record">
+   <div id="Record_p" class="Record_p">
+     <div class="title_name"><span class="name left">浏览历史</span><span class="pageState right"><span>1</span>/7</span></div>
+     <div class="hd"><a class="next">&lt;</a><a class="prev">&gt;</a></div>
+     <div class="bd">
+      <ul >
+        {volist name="productList2" id="vo"}
+        <li class="clone">
+          <div class="p_width">
+            <div class="pic"><a href=""><img src="{$vo['ppic']}"></a></div>	
+            <div class="title"><a href="#">{$vo['pname']}</a></div>
+            <div class="Purchase_info"><span class="p_Price">￥{$vo['pprice']}</span> <a href="#" class="Purchase">立即购买</a></div>
+          </div>	
+        </li>
+        {/volist}
+      </ul>
+    </div>    
+  </div>
+  <script type="text/javascript">jQuery("#Record_p").slide({ mainCell:".bd ul",effect:"leftLoop",vis:1,autoPlay:false });</script>
+</div>
+</div>      
+</div>
+
+
+
+<!--收藏商品-->
+<div class="Collections_p">
+  <div class="slideGroups">
+    <div class="parHd">
+      <ul><li>收藏的商品</li><li>收藏的店铺</li></ul>
+    </div>
+    <div class="parBd">
+      <!-- 收藏的商品 -->
+      <div class="Collect_Products">
+        <a class="sPrev" href="javascript:void(0)">&lt;</a>
+        <ul >
+          {volist name="productList" id="vo"}
+          <li>
+            <div class="pic"><a href=""><img src="{$vo['ppic']}"></a></div>	
+            <div class="title"><a href="#">{$vo['pname']}</a></div>
+            <div class="p_Price">￥{$vo['pprice']}</div>		
+          </li>
+          {/volist}
+        </ul>
+        <a class="sNext" href="javascript:void(0)">&gt;</a>
+        <a href="#" class="more">更多收藏</a>
+      </div>
+      <!-- 收藏的店铺 -->
+      <div class="Collect_Products">
+       <a class="sPrev" href="javascript:void(0)">&lt;</a>
+       <ul >
+        {volist name="productList2" id="vo"}
+        <li>
+          <div class="pic"><a href=""><img src="{$vo['ppic']}"></a></div>
+          <div class="title"><a href="#">{$vo['pname']}</a></div>
+          <div class="shop_name"><span>品牌：{$Brand[$vo['pcid']]}</span><a href="#" >进入店铺</a></div>
+        </li>
+        {/volist}
+      </ul>
+      <a class="sNext" href="javascript:void(0)">&gt;</a>
+      <a href="#" class="more">更多收藏</a>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+ /* 内层图片无缝滚动 */
+ jQuery(".slideGroups .Collect_Products").slide({ mainCell:"ul",vis:5,prevCell:".sPrev",nextCell:".sNext",effect:"leftMarquee",interTime:50,autoPlay:true,trigger:"click"});
+
+ /* 外层tab切换 */
+ jQuery(".slideGroups").slide({titCell:".parHd li",mainCell:".parBd",trigger:"click"});
+
+</script>
+</div>
+<!--结束-->       
+</div>
+
+</div>
+</div>
+</div>
+{/block}

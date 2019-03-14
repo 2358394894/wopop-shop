@@ -1,0 +1,53 @@
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:68:"F:\phpStudy\WWW\public/../application/index\view\register\index.html";i:1540965711;}*/ ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>用户注册</title>
+	<link href="/static/index/css/landr.css" rel="stylesheet" media="screen" />
+</head>
+
+<body>
+<div class="login_top">
+    <div class="wrapper">
+        <div class="login_logo"><a href="<?php echo url('index/Index/index'); ?>"><img src="/static/index/images/logo.png" width="196" height="46"></a></div>
+        <div class="fr">您好，欢迎为生活充电在线！</div>
+    </div>
+</div>
+
+<form id="msform" action="" method="post">
+	<!-- progressbar -->
+	<ul id="progressbar">
+		<li class="active">邮箱设置</li><li>密码设置</li><li>个人信息</li>
+	</ul>
+	<!-- fieldsets -->
+	<fieldset>
+		<h2 class="fs-title">创建您的WOPOP帐户</h2>
+		<h3 class="fs-subtitle">这是第一步</h3>
+		<input type="text" name="uemail" placeholder="邮箱地址" />
+		<input type="button" class="next action-button" value="下一步" />
+	</fieldset>
+	<fieldset>
+		<h2 class="fs-title">密码设置</h2>
+		<h3 class="fs-subtitle">请设置您的登陆密码</h3>
+		<input type="password" name="upwd" placeholder="密码" />
+		<input type="password" name="cpass" placeholder="确认密码" />
+		<input type="button" class="previous action-button" value="上一步" />
+		<input type="button" class="next action-button" value="下一步" />
+	</fieldset>
+	<fieldset>
+		<h2 class="fs-title">个人信息</h2>
+		<h3 class="fs-subtitle">您的信息我们将严格保密！</h3>
+		<input type="text" name="uname" placeholder="昵称" />
+		<input type="text" name="uphone" placeholder="手机号" />
+		<input type="button" class="previous action-button" value="上一步" />
+		<input type="submit" class="action-button" value="提交" />
+	</fieldset>
+</form>
+
+<script src="/static/index/js/jquery-1.8.3.min.js" type="text/javascript"></script>
+<script src="/static/index/js/jquery.easing.min.js" type="text/javascript"></script>
+<script src="/static/index/js/jQuery.time.js" type="text/javascript"></script>
+
+</body>
+</html>

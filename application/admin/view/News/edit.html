@@ -1,0 +1,64 @@
+{extend name="layout/base"}
+
+{block name="right-content"}
+<div class="header"><h1 class="page-title">修改 新闻信息</h1></div>
+
+<ul class="breadcrumb">
+    <li><a href="index.html">主页</a> <span class="divider">/</span></li>
+    <li><a href="users.html">新闻列表</a> <span class="divider">/</span></li>
+    <li class="active">修改新闻信息</li>
+</ul>
+
+<div class="container-fluid">
+    <div class="row-fluid">
+        <!-- 按钮 -->    
+        <div class="btn-toolbar">
+            <button class="btn btn-primary" onclick="sub()"><i class="icon-save"></i> 保存</button>
+            <!-- 给保存按钮绑定表单提交事件 -->
+            <script type="text/javascript">
+                function sub(){
+                    document.getElementById('tab').submit();
+                }
+            </script>
+            <button class="btn btn-danger" onclick="res()"><i class="icon-undo"></i> 重置</button>
+            <!-- 给重置按钮绑定表单清空事件 -->
+            <script type="text/javascript">
+                function res() {
+                    document.getElementById('tab').reset();
+                }
+            </script>
+            <div class="btn-group"></div>
+        </div>
+        <!-- 表单 -->
+        <div class="well">
+            <ul class="nav nav-tabs">
+              <li class="active"><a href="#home" data-toggle="tab">新闻信息</a></li>
+            </ul>
+            <div id="myTabContent" class="tab-content">
+                <div class="tab-pane active in" id="home">
+                <form id="tab" action="/admin/news" method="post" enctype="multipart/form-data">
+					<!-- 添加表单隐藏控件，用于保存当前品牌的ID号 -->
+                    <input type="hidden" name="id" value="{$res->nid}">
+
+                    <label>新闻标题</label>
+                    <input type="text" name="ntitle" class="input-xlarge" value="{$res->ntitle}">
+                    <label>作者</label>
+                    <input type="text" name="author" class="input-xlarge" value="{$res->author}">
+                    <label>新闻介绍</label>
+                    <textarea rows="5" class="input-xlarge" name="ncontent" placeholder="请填写内容"><?php echo $res->ncontent; ?></textarea>
+                    <label>发布日期(自动更新)</label>
+                    <input type="text" name="ntitle" class="input-xlarge" value="{$res->ndate}" disabled>
+                </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- 尾部 -->
+        <footer>
+            <hr>                        
+            <p class="pull-right">Copyright statement<a href="#" title="wopop" target="_blank">&ensp;wopop</a></p>
+            <p>&copy; wopop <a href="#" target="_blank">Create</a></p>
+        </footer>
+    </div>
+</div>
+{/block}

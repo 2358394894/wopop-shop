@@ -1,0 +1,393 @@
+{extend name="layout/base"}
+
+{block name="content"}
+<!--广告幻灯片样式-->
+<div id="slideBox" class="slideBox">
+	<div class="hd">
+		<ul class="smallUl"></ul>
+	</div>
+	<div class="bd">
+		<ul>
+			<li><a href="#" target="_blank"><div style="background:url(/static/index/ws/ad-1.jpg) no-repeat; background-position:center ; width:100%; height:450px;"></div></a></li>
+			<li><a href="#" target="_blank"><div style="background:url(/static/index/ws/ad-2.jpg) no-repeat; background-position:center ; width:100%; height:450px;"></div></a></li>
+			<li><a href="#" target="_blank"><div style="background:url(/static/index/ws/ad-3.jpg) no-repeat rgb(226, 155, 197);background-position:center; width:100%; height:450px;"></div></a></li>
+            <li><a href="#" target="_blank"><div style="background:url(/static/index/ws/ad-1.jpg) no-repeat #f7ddea; background-position:center; width:100%; height:450px;"></div></a></li>
+            <li><a href="#" target="_blank"><div style="background:url(/static/index/ws/ad-2.jpg) no-repeat  #F60; background-position:center; width:100%; height:450px;"></div></a></li>
+		</ul>
+	</div>
+	<!-- 下面是前/后按钮-->
+	<a class="prev" href="javascript:void(0)"></a>
+	<a class="next" href="javascript:void(0)"></a>
+
+	<script type="text/javascript">
+	jQuery(".slideBox").slide({titCell:".hd ul",mainCell:".bd ul",autoPlay:true,autoPage:true});
+	</script>
+</div>
+
+<!--内容样式-->
+<div id="mian">
+<div class="clearfix marginbottom">
+	<!--产品分类样式-->
+	<div class="Menu_style" id="allSortOuterbox">
+	   	<div class="title_name"><em></em>所有商品分类</div>
+	   	<div class="content hd_allsort_out_box_new">
+	    <ul class="Menu_list">
+	    	<!--鼠标-->
+	      	<li class="name">
+			<div class="Menu_name"><a href="#">鼠标</a><span>&lt;</span></div>
+			<div class="link_name"></div>
+			<div class="menv_Detail">
+				<div class="cat_pannel clearfix">
+					<div class="hd_sort_list">
+					    <dl class="clearfix" data-tpc="1">
+							<dt><a href="#">有线鼠标<i>></i></a></dt>
+							<dd>
+							{volist name="cateMouse" id="vo"}
+								<a href="#">{$vo['cname']}</a>
+							{/volist}
+							</dd>
+						</dl>
+						 <dl class="clearfix" data-tpc="2">
+							<dt><a href="#">无线鼠标<i>></i></a></dt>
+							<dd><a href="#"></a><img src="/static/index/ws/bingb.jpg"/></dd>
+						</dl>
+				   	</div>
+			   		<div class="Brands"></div>
+				</div>
+			</div>	 
+			</li>
+			<!-- 键盘 -->
+	        <li class="name">
+			<div class="Menu_name"><a href="#">键盘</a><span>&lt;</span></div>
+			<div class="link_name"></div>
+			<div class="menv_Detail">
+				<div class="cat_pannel clearfix">
+					<div class="hd_sort_list">
+						    <dl class="clearfix" data-tpc="1">
+								<dt><a href="#">机械键盘<i>></i></a></dt>
+								<dd>
+								{volist name="cateKeyboard" id="vo"}
+									<a href="#">{$vo['cname']}</a>
+								{/volist}
+								</dd>
+							</dl>
+					</div>
+				   	<div class="Brands"></div>
+				</div>
+			</div>
+			</li>
+			<!-- 耳机 -->
+	        <li class="name">
+			<div class="Menu_name"><a href="#">耳机</a><span>&lt;</span></div>
+			<div class="link_name"></div>
+			<div class="menv_Detail">
+				<div class="cat_pannel clearfix">
+					<div class="hd_sort_list">
+					    <dl class="clearfix" data-tpc="1">
+							<dt><a href="#">运动耳机<i>></i></a></dt>
+							<dd>
+							{volist name="cateHeadset" id="vo"}
+								<a href="#">{$vo['cname']}</a>
+							{/volist}
+							</dd>
+						</dl>
+					</div>
+				   	<div class="Brands"></div>
+				</div>
+			</div>
+			</li>
+		</ul>
+		</div>
+	</div>
+	<!-- 产品分类框显示与隐藏函数 -->
+  	<script>$("#allSortOuterbox").slide({ titCell:".Menu_list li",mainCell:".menv_Detail",	});</script>
+
+	<!--产品栏切换-->
+	<div class="product_list left">
+		<div class="slideGroup">
+			<div class="parHd">
+				<ul><li>新品上市</li><li>电竞鼠标</li><li>机械键盘</li><li>高端耳机</li><li>热销商品</li></ul>
+			</div>
+			<div class="parBd">
+					<!-- 新品上市 -->
+					<div class="slideBoxs">
+						<a class="sPrev" href="javascript:void(0)"></a>
+						<ul>
+							{volist name="proList1" id="vo"}
+							<li>
+								<div class="pic"><a href="#" target="_blank"><img src="{$vo['ppic']}" /></a></div>
+								<div class="title">
+	                            <a href="#" target="_blank" class="name">{$vo['pname']}</a>
+	                            <h3><b>￥</b>{$vo['pprice']}</h3>
+	                            </div>
+							</li>
+							{/volist}
+						</ul>
+						<a class="sNext" href="javascript:void(0)"></a>
+					</div><!-- slideBox End -->
+					<!-- 鼠标 -->
+					<div class="slideBoxs">
+						<a class="sPrev" href="javascript:void(0)"></a>
+						<ul>
+							{volist name="proMouse" id="vo"}
+							<li>
+								<div class="pic"><a href="#" target="_blank"><img src="{$vo['ppic']}" /></a></div>
+								<div class="title">
+	                            <a href="#" target="_blank" class="name">{$vo['pname']}</a>
+	                            <h3><b>￥</b>{$vo['pprice']}</h3>
+	                            </div>
+							</li>
+							{/volist}
+						</ul>
+						<a class="sNext" href="javascript:void(0)"></a>
+					</div><!-- slideBox End -->
+					<!-- 键盘 -->
+					<div class="slideBoxs">
+						<a class="sPrev" href="javascript:void(0)"></a>
+						<ul>
+							{volist name="proKeyboard" id="vo"}
+							<li>
+								<div class="pic"><a href="#" target="_blank"><img src="{$vo['ppic']}" /></a></div>
+								<div class="title">
+	                            <a href="#" target="_blank" class="name">{$vo['pname']}</a>
+	                            <h3><b>￥</b>{$vo['pprice']}</h3>
+	                            </div>
+							</li>
+							{/volist}
+						</ul>
+						<a class="sNext" href="javascript:void(0)"></a>
+					</div><!-- slideBox End -->
+					<!-- 耳机 -->
+	                <div class="slideBoxs">
+						<a class="sPrev" href="javascript:void(0)"></a>
+						<ul>
+							{volist name="proHeadset" id="vo"}
+							<li>
+								<div class="pic"><a href="#" target="_blank"><img src="{$vo['ppic']}" /></a></div>
+								<div class="title">
+	                            <a href="#" target="_blank" class="name">{$vo['pname']}</a>
+	                            <h3><b>￥</b>{$vo['pprice']}</h3>
+	                            </div>
+							</li>
+							{/volist}
+						</ul>
+						<a class="sNext" href="javascript:void(0)"></a>
+					</div><!-- slideBox End -->
+					<!-- 热销商品 -->
+	                <div class="slideBoxs">
+						<a class="sPrev" href="javascript:void(0)"></a>
+						<ul>
+							{volist name="proHot" id="vo"}
+							<li>
+								<div class="pic"><a href="#" target="_blank"><img src="{$vo['ppic']}" /></a></div>
+								<div class="title">
+	                            <a href="#" target="_blank" class="name">{$vo['pname']}</a>
+	                            <h3><b>￥</b>{$vo['pprice']}</h3>
+	                            </div>
+							</li>
+							{/volist}
+						</ul>
+						<a class="sNext" href="javascript:void(0)"></a>
+					</div><!-- slideBox End -->
+			</div><!-- parBd End -->
+		</div>
+		<!-- 图片滚动函数 -->
+	    <script type="text/javascript">
+			/* 内层图片无缝滚动 */
+			jQuery(".slideGroup .slideBoxs").slide({ mainCell:"ul",vis:4,prevCell:".sPrev",nextCell:".sNext",effect:"leftMarquee",interTime:50,autoPlay:true,trigger:"click"});
+			/* 外层tab切换 */
+			jQuery(".slideGroup").slide({titCell:".parHd li",mainCell:".parBd"});
+		</script>
+	    <!--广告样式-->
+	    <div class="Ads_style"><a href="#"><img src="/static/index/ws/b-1.jpg"  width="318"/></a><a href="#"><img src="/static/index/ws/b-2.jpg" width="318"/></a><a href="#"><img src="/static/index/ws/b-3.jpg" width="318"/></a></div>
+	</div>
+</div>
+
+<!--板块栏目样式-->
+<div class="clearfix Plate_style">
+	<!-- 鼠标模块 -->
+  	<div class="Plate_column Plate_column_left">
+	    <div class="Plate_name">
+		    <h2>鼠标🖱</h2>
+		    <div class="Sort_link">
+				{volist name="cateMouse" id="vo"}
+		    		<a href="#" class="name">{$vo['cname']}</a>
+				{/volist}
+		    </div>
+		    <a href="#" class="Plate_link"><img src="/static/index/images/bk_img_11.png" /></a>
+	    </div>
+    	<div class="Plate_product">
+		    <ul id="lists">
+	    	{volist name="proMouse" id="vo"}
+		    <li class="product_display">
+		    	<a href="" class="Collect"><em></em>收藏</a>
+		    	<a href="#" class="img_link"><img src="{$vo['ppic']}" width="140" height="140"/></a>
+		     	<a href="#" class="name">{$vo['pname']}</a>
+		    	<h3><b>￥</b>{$vo['pprice']}</h3>
+		    	<div class="Detailed">
+					<div class="content"><p class="center"><a href="#" class="Buy_btn">立即购买</a></p></div>
+			   </div>
+		    </li>
+		    {/volist}
+		    </ul>
+    	</div>
+  	</div>
+	<!-- 键盘模块 -->
+    <div class="Plate_column Plate_column_right">
+    	<div class="Plate_name">
+		    <h2>键盘⌨</h2>
+		    <div class="Sort_link">
+				{volist name="cateKeyboard" id="vo"}
+		    		<a href="#" class="name">{$vo['cname']}</a>
+				{/volist}
+		    </div>
+		    <a href="#" class="Plate_link"><img src="/static/index/images/bk_img_14.png" /></a>
+	    </div>
+    	<div class="Plate_product">
+	    	<ul id="lists">
+		    {volist name="proKeyboard" id="vo"}
+		    <li class="product_display">
+		    	<a href="" class="Collect"><em></em>收藏</a>
+		    	<a href="#" class="img_link"><img src="{$vo['ppic']}" width="140" height="140"/></a>
+		     	<a href="#" class="name">{$vo['pname']}</a>
+		    	<h3><b>￥</b>{$vo['pprice']}</h3>
+		    	<div class="Detailed">
+					<div class="content"><p class="center"><a href="#" class="Buy_btn">立即购买</a></p></div>
+			   </div>
+		    </li>
+		    {/volist}
+	    	</ul>
+    	</div>
+	</div>
+	<!-- 耳机模块 -->
+	<div class="Plate_column Plate_column_left">
+    	<div class="Plate_name">
+		    <h2>耳机🎧</h2>
+		    <div class="Sort_link">
+				{volist name="cateHeadset" id="vo"}
+		    		<a href="#" class="name">{$vo['cname']}</a>
+				{/volist}
+		    </div>
+		    <a href="#" class="Plate_link"><img src="/static/index/images/bk_img_19.png" /></a>
+	    </div>
+    	<div class="Plate_product">
+	    	<ul id="lists">
+		    {volist name="proHeadset" id="vo"}
+		    <li class="product_display">
+		    	<a href="" class="Collect"><em></em>收藏</a>
+		    	<a href="#" class="img_link"><img src="{$vo['ppic']}" width="140" height="140"/></a>
+		     	<a href="#" class="name">{$vo['pname']}</a>
+		    	<h3><b>￥</b>{$vo['pprice']}</h3>
+		    	<div class="Detailed">
+					<div class="content"><p class="center"><a href="#" class="Buy_btn">立即购买</a></p></div>
+			   </div>
+		    </li>
+		    {/volist}
+	    	</ul>
+    	</div>
+    </div>
+    <!-- 猜你喜欢 -->
+    <div class="Plate_column Plate_column_right">
+    	<div class="Plate_name">
+		    <h2>猜你喜欢💗</h2>
+		    <div class="Sort_link">
+				{volist name="cateLike" id="vo"}
+		    		<a href="#" class="name">{$vo['cname']}</a>
+				{/volist}
+		    </div>
+		    <a href="#" class="Plate_link"><img src="/static/index/images/bk_img_22.png" /></a>
+	    </div>
+	    <div class="Plate_product">
+	    	<ul id="lists">
+		    {volist name="proHot" id="vo"}
+		    <li class="product_display">
+		    	<a href="" class="Collect"><em></em>收藏</a>
+		    	<a href="#" class="img_link"><img src="{$vo['ppic']}" width="140" height="140"/></a>
+		     	<a href="#" class="name">{$vo['pname']}</a>
+		    	<h3><b>￥</b>{$vo['pprice']}</h3>
+		    	<div class="Detailed">
+					<div class="content"><p class="center"><a href="#" class="Buy_btn">立即购买</a></p></div>
+			   </div>
+		    </li>
+		    {/volist}
+	    	</ul>
+    	</div>
+ 	</div>
+</div>
+
+<!--友情链接-->
+	<div class="link_style clearfix">
+	<div class="title">友情链接</div>
+	<div class="link_name">
+	<a href="#"><img src="/static/index/ws/01.jpg"  width="100"/></a>
+	<a href="#"><img src="/static/index/ws/02.jpg"  width="100"/></a>
+	<a href="#"><img src="/static/index/ws/03.jpg"  width="100"/></a>
+	<a href="#"><img src="/static/index/ws/04.jpg"  width="100"/></a>
+	<a href="#"><img src="/static/index/ws/05.jpg"  width="100"/></a>
+	<a href="#"><img src="/static/index/ws/06.jpg"  width="100"/></a>
+	<a href="#"><img src="/static/index/ws/07.jpg"  width="100"/></a>
+	<a href="#"><img src="/static/index/ws/08.jpg"  width="100"/></a>
+	<a href="#"><img src="/static/index/ws/09.jpg"  width="100"/></a>
+	<a href="#"><img src="/static/index/ws/10.jpg"  width="100"/></a>
+	<a href="#"><img src="/static/index/ws/11.jpg"  width="100"/></a>
+	<a href="#"><img src="/static/index/ws/12.jpg"  width="100"/></a>
+	<a href="#"><img src="/static/index/ws/13.jpg"  width="100"/></a>
+	</div>
+	</div>
+</div>
+
+<!--右侧菜单栏购物车样式-->
+<div class="fixedBox">
+	<ul class="fixedBoxList">
+		<!-- 消息中心 -->
+	  	<li class="fixeBoxLi user">
+	  		<a href="#"><span class="fixeBoxSpan"></span> <strong>消息中心</strong></a>
+	  	</li>
+	  	<!-- 购物车 -->
+		<li class="fixeBoxLi cart_bd" style="display:block;" id="cartboxs">
+			<p class="good_cart">0</p>
+			<span class="fixeBoxSpan"></span> <strong>购物车</strong>
+			<div class="cartBox">
+		   		<div class="bjfff"></div>
+		   		<div class="message">购物车内暂无商品，赶紧选购吧</div>
+		   	</div>
+		</li>
+		<!-- 客服 -->
+		<li class="fixeBoxLi Service">
+			<span class="fixeBoxSpan"></span><strong>客服</strong>
+			<div class="ServiceBox">
+	    		<div class="bjfffs"></div>
+	    		<dl onclick="javascript:;">
+		    		<dt><img src="/static/index/images/Service1.png"></dt>
+		       		<dd><strong>在线客服1</strong>
+		          		<p class="p1">9:00-22:00</p>
+		           		<p class="p2"><a href="#">点击交谈</a></p>
+		        	</dd>
+		        </dl>
+				<dl onclick="javascript:;">
+		        	<dt><img src="/static/index/images/Service1.png"></dt>
+		        	<dd> <strong>在线客服2</strong>
+		        		<p class="p1">9:00-22:00</p>
+		        		<p class="p2"><a href="#">点击交谈</a></p>
+		        	</dd>
+		        </dl>
+		    </div>
+		</li>
+		<!-- 微信 -->
+		<li class="fixeBoxLi code cart_bd " style="display:block;" id="cartboxs">
+			<span class="fixeBoxSpan"></span><strong>微信</strong>
+			<div class="cartBox">
+	   			<div class="bjfff"></div>
+				<div class="QR_code">
+					<p><img src="/static/index/images/qd.jpg" width="180px" height="180px" /></p>
+					<p>微信扫一扫，关注我们</p>
+				</div>		
+			</div>
+		</li>
+		<!-- 收藏夹 -->
+		<li class="fixeBoxLi Home"> <a href="./"> <span class="fixeBoxSpan"></span> <strong>收藏夹</strong></a> </li>
+		<!-- 返回顶部 -->
+		<li class="fixeBoxLi BackToTop"> <span class="fixeBoxSpan"></span> <strong>返回顶部</strong> </li>
+	</ul>
+</div>
+{/block}

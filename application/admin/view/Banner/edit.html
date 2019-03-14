@@ -1,0 +1,75 @@
+{extend name="layout/base"}
+
+{block name="right-content"}
+<div class="header"><h1 class="page-title">修改 广告图</h1></div>
+
+<ul class="breadcrumb">
+    <li><a href="index.html">主页</a> <span class="divider">/</span></li>
+    <li><a href="users.html">广告图列表</a> <span class="divider">/</span></li>
+    <li class="active">修改广告图</li>
+</ul>
+
+<div class="container-fluid">
+    <div class="row-fluid">
+        <!-- 按钮 -->    
+        <div class="btn-toolbar">
+            <button class="btn btn-primary" onclick="sub()"><i class="icon-save"></i> 保存</button>
+            <!-- 给保存按钮绑定表单提交事件 -->
+            <script type="text/javascript">
+                function sub(){
+                    document.getElementById('tab').submit();
+                }
+            </script>
+            <button class="btn btn-danger" onclick="res()"><i class="icon-undo"></i> 重置</button>
+            <!-- 给重置按钮绑定表单清空事件 -->
+            <script type="text/javascript">
+                function res() {
+                    document.getElementById('tab').reset();
+                }
+            </script>
+            <div class="btn-group"></div>
+        </div>
+        <!-- 表单 -->
+        <div class="well">
+            <ul class="nav nav-tabs">
+              <li class="active"><a href="#home" data-toggle="tab">广告图信息</a></li>
+            </ul>
+            <div id="myTabContent" class="tab-content">
+                <div class="tab-pane active in" id="home">
+                <form id="tab" action="/admin/banner" method="post" enctype="multipart/form-data">
+					<!-- 添加表单隐藏控件，用于绑定banner图片ID，作为数据更新条件 -->
+                    <input type="hidden" name="bid" value="{$ban->bid}">
+
+                    <label>广告图片</label>
+                    <input id="lefile" type="file" name="bpic" style="display:none">
+                    <!-- 创建隐藏控件，用于获取保存原图片路径 -->
+                    <input type="hidden" name="bimg" value="{$ban->bpic}">
+                    <div class="input-append">
+                        <input id="photoCover" class="input-large" type="text" value="{$ban->bpic}" disabled>
+                        <a class="btn btn-info" onclick="$('input[id=lefile]').click();"><i class="icon-folder-open"></i> 选择文件</a>
+                        <img src="{$ban->bpic}" style="width: 18%; border:1px solid red; position: absolute; margin-left: 10px;">
+                    </div>
+                    <!-- 给选择文件按钮绑定文件上传事件 -->
+                    <script type="text/javascript">
+                        $('input[id=lefile]').change(function() {
+                            $('#photoCover').val($(this).val());  
+                        });
+                    </script>
+                    <label>页面跳转地址</label>
+                    <input type="text" name="burl" class="input-xlarge" value="{$ban->burl}">
+                    <label>图片序号</label>
+                    <input type="text" name="border" class="input-xlarge" value="{$ban->border}">
+                </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- 尾部 -->
+        <footer>
+            <hr>                        
+            <p class="pull-right">Copyright statement<a href="#" title="wopop" target="_blank">&ensp;wopop</a></p>
+            <p>&copy; wopop <a href="#" target="_blank">Create</a></p>
+        </footer>
+    </div>
+</div>
+{/block}
